@@ -5,6 +5,7 @@ class BooksController < ApplicationController
     @user = current_user
     @book = Book.new
     @book_comment = BookComment.new
+    @rank_books = Book.order(impressions_count: 'DESC')
   end
   
   def create
@@ -25,7 +26,7 @@ class BooksController < ApplicationController
     @book_new = Book.new
     @user = current_user
     @book_comment = BookComment.new
-    
+    impressionist(@book, nil, unique: [:ip_address])
   end
   
   def edit
